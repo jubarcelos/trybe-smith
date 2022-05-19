@@ -1,8 +1,12 @@
-import Jwt, { Secret } from 'jsonwebtoken';
+import Jwt from 'jsonwebtoken';
 import { NextFunction, Response, Request } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-const secret = process.env.JWT_SECRET as Secret;
+const secret = process.env.JWT_SECRET || 'senha';
+
+interface IError {
+  name: string;
+}
 
 const authenticate = (req:Request, res:Response, next:NextFunction) => {
   const authHeader = req.headers.authorization;
@@ -11,10 +15,11 @@ const authenticate = (req:Request, res:Response, next:NextFunction) => {
   }
   try {
     const decode = Jwt.verify(authHeader, secret);
-    req.user = decode;
+    req.body.user = decode;
     next();
-  } catch (error:unknown) {
-    if (error.name.includes('JsonWebTokenError')) {
+  } catch (error) {
+    const { name } = error as IError;
+    if (name.includes('JsonWebTokenError')) {
       return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Expired or invalid token' });
     }
     next(error);
