@@ -9,7 +9,7 @@ const input = {
   orderPOST: joi.object().keys({
     name: joi.string().min(8).required(),
     amount: joi.string().required(),
-    orderId: joi.number().required(),
+    producstIds: joi.array().required(),
   }),
   userPOST: joi.object().keys({
     username: joi.string().min(3).required(),
