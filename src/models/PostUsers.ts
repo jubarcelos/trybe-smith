@@ -9,9 +9,9 @@ export const getById = async (id: number): Promise<IUser> => {
   return user;
 };
 
-export const getByName = async (name: string): Promise<IUser> => {
+export const getByName = async (username: string): Promise<IUser> => {
   const [result] = await connection
-    .execute('SELECT * FROM Trybesmith.Users WHERE name = ?', [name]);
+    .execute('SELECT * FROM Trybesmith.Users WHERE username = ?', [username]);
   const [user] = result as IUser[];
   return user;
 };

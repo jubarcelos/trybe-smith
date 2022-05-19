@@ -8,7 +8,7 @@ import postUsers from './controllers/PostUsers';
 import error from './middlewares/Errors';
 import inputValidator from './middlewares/InputValidator';
 import Schema from './schemas';
-import Jwt from './middlewares/jwt';
+// import Jwt from './middlewares/jwt';
 
 const app = express();
 
@@ -16,7 +16,7 @@ app.use(express.json());
 app.get('/products', getProducts);
 app.post('/products', inputValidator(Schema.input.productPOST), postProducts);
 app.get('/users', getUsers);
-app.post('/users', inputValidator(Schema.input.userPOST), Jwt, postUsers);
+app.post('/users', inputValidator(Schema.input.userPOST), postUsers);
 // app.get('/orders', getOrders);
 // app.post('/orders', inputValidator(Schema.input.orderPOST), postOrders);
 
