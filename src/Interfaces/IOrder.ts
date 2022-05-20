@@ -1,6 +1,5 @@
 export interface IOrder {
   id?:number;
-  name: string;
-  amount: string;
+  userId: number;
   productsIds: number[];
 }

@@ -5,11 +5,13 @@ const input = {
   productPOST: joi.object().keys({
     name: joi.string().min(3).required(),
     amount: joi.string().min(3).required(),
+    orderId: joi.number(),
+
   }),
   orderPOST: joi.object().keys({
     name: joi.string().min(8).required(),
-    amount: joi.string().required(),
-    producstIds: joi.array().required(),
+    userId: joi.number().required(),
+    productsIds: joi.array().required(),
   }),
   userPOST: joi.object().keys({
     username: joi.string().min(3).required(),
