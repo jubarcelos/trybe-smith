@@ -6,7 +6,7 @@ const postProducts = async (product:IProduct) => {
   const { name } = product;
   const existence = await getByName(name);
   if (existence) {
-    return { status: StatusCodes.CONFLICT, message: 'Order already registered' };
+    return { status: StatusCodes.CONFLICT, message: 'Product already registered' };
   }
 
   const newProduct = await create(product);
